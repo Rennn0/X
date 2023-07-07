@@ -1,1 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
+// LARGE
+#video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+@media screen and (min-width: 1280px) {
+  body {
+    width: 100%;
+    max-width: 1280px;
+    height: 100vh;
+    margin: auto;
+    // background-image: url(lib/assets/ocean_large.jpg);
+    // background-size: cover;
+    // background-position: center;
+  }
+}
+// LAPTOP && TAB
+@media screen and (min-width: 769px) and (max-width: 1279px) {
+  body {
+    width: 100%;
+    max-width: 1279px;
+    height: 100vh;
+    margin: auto;
+    // background-image: url(lib/assets/ocean_large.jpg);
+    // background-size: cover;
+    // background-position: center;
+  }
+}
+// TAB && MOBILE
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  body {
+    width: 100%;
+    max-width: 768px;
+    height: 100vh;
+    margin: auto;
+    // background-image: url(lib/assets/ocean_medium.jpg);
+    // background-size: cover;
+    // background-position: center;
+  }
+}
+// SMALL
+@media screen and (max-width: 480px) {
+  body {
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    margin: auto;
+    // background-image: url(lib/assets/ocean_small.jpg);
+    // background-size: cover;
+    // background-position: center;
+  }
+}
