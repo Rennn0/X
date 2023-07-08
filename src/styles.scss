@@ -1,4 +1,3 @@
-// LARGE
 #video-background {
   position: fixed;
   top: 0;
@@ -8,15 +7,14 @@
   object-fit: cover;
   z-index: -1;
 }
+// LARGE
 @media screen and (min-width: 1280px) {
   body {
     width: 100%;
     max-width: 1280px;
     height: 100vh;
     margin: auto;
-    // background-image: url(lib/assets/ocean_large.jpg);
-    // background-size: cover;
-    // background-position: center;
+    overflow: hidden;
   }
 }
 // LAPTOP && TAB
@@ -26,9 +24,7 @@
     max-width: 1279px;
     height: 100vh;
     margin: auto;
-    // background-image: url(lib/assets/ocean_large.jpg);
-    // background-size: cover;
-    // background-position: center;
+    overflow: hidden;
   }
 }
 // TAB && MOBILE
@@ -38,9 +34,10 @@
     max-width: 768px;
     height: 100vh;
     margin: auto;
-    // background-image: url(lib/assets/ocean_medium.jpg);
-    // background-size: cover;
-    // background-position: center;
+  }
+
+  main {
+    overflow: auto;
   }
 }
 // SMALL
@@ -50,8 +47,12 @@
     max-width: 480px;
     height: 100vh;
     margin: auto;
-    // background-image: url(lib/assets/ocean_small.jpg);
-    // background-size: cover;
-    // background-position: center;
+    overflow: hidden;
+  }
+  main {
+    overflow: auto;
+    .col-md-4 {
+      margin-top: 50px !important;
+    }
   }
 }
