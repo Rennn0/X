@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class MainService {}
+export class MainService {
+  constructor() {}
+}
 
 export const main_aboutUsContent = {
   title: 'About Us',

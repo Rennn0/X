@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
     "bootstrap": "^5.3.0",
+    "firebase": "^10.0.0",
     "ng-typing": "^0.1.1",
     "ngx-typed-js": "^2.1.1",
     "rxjs": "~7.8.0",

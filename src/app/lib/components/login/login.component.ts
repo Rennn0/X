@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { MainService, main_aboutUsContent } from '../../services/main.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -24,10 +25,16 @@ import { MainService, main_aboutUsContent } from '../../services/main.service';
 })
 export class LoginComponent {
   aboutUsContent = main_aboutUsContent;
-
-  constructor(private main: MainService) {}
-
+  videoUrl: any;
   divToggler: boolean = false;
+
+  constructor(private main: MainService, private sanitizer: DomSanitizer) {}
+
+  ngOnInit(): void {
+    this.videoUrl =
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/wawes.mp4');
+  }
+
   toggleDiv() {
     this.divToggler = !this.divToggler;
   }
