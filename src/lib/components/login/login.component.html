@@ -42,14 +42,15 @@
         [startDelay]="2000"
         [strings]="[aboutUsContent.body]"
         [showCursor]="false"
+        (completed)="isTitleTime()"
       >
         <p class="typing"></p>
       </ngx-typed-js>
       <ngx-typed-js
         [typeSpeed]="10"
-        [startDelay]="22000"
         [strings]="[aboutUsContent.author]"
         [showCursor]="false"
+        *ngIf="titleTime"
       >
         <footer class="blockquote-footer typing">
           <cite title="Source Title"></cite>

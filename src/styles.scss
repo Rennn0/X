@@ -38,6 +38,9 @@
 
   main {
     overflow: auto;
+    .col-md-4 {
+      margin-top: 50px !important;
+    }
   }
 }
 // SMALL

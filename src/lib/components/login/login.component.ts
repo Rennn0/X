@@ -24,18 +24,29 @@ import { DomSanitizer } from '@angular/platform-browser';
   ],
 })
 export class LoginComponent {
+
   aboutUsContent = main_aboutUsContent;
+
   videoUrl: any;
+
   divToggler: boolean = false;
 
-  constructor(private main: MainService, private sanitizer: DomSanitizer) {}
+  titleTime: boolean = false;
+
+  constructor(private main: MainService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.videoUrl =
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/wawes.mp4');
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      'lib/assets/wawes.mp4'
+    );
+
   }
 
   toggleDiv() {
     this.divToggler = !this.divToggler;
+  }
+
+  isTitleTime() {
+    this.titleTime = true;
   }
 }

@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './lib/components/login/login.component';
 import { NgxTypedJsModule } from 'ngx-typed-js';
+import { LoginComponent } from 'src/lib/components/login/login.component';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],

@@ -23,15 +23,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "src/lib/assets/",
-                "output": "/assets/"
-              }
-            ],
+            "assets": ["src/lib/assets"],
             "styles": ["src/styles.scss"],
             "scripts": []
           },
