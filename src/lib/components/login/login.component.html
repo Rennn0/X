@@ -19,27 +19,41 @@
 </nav>
 
 <main class="container w-75 h-75 bg-opacity-75 bg-light">
-  <div class="row h-100">
+  <div class="row h-100" id="LOGIN_">
     <div class="col-md-8" *ngIf="!divToggler" [@slideDown]>
-      <h1 class="text-center">Login</h1>
       <div class="row">
-        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
+        <label class="sr-only text-center m-2">Username</label>
+        <div class="col-sm-6 col-md-9 m-auto">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
+            </div>
+            <input type="text" class="form-control" placeholder="" />
+          </div>
+        </div>
       </div>
-      <h1 class="text-center">Login</h1>
       <div class="row">
-        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
+        <label class="sr-only text-center m-2">Password</label>
+        <div class="col-sm-6 col-md-9 m-auto">
+          <div class="input-group mb-2">
+            <input type="password" class="form-control" placeholder="" />
+          </div>
+        </div>
       </div>
-      <h1 class="text-center">Login</h1>
-      <div class="row">
-        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
-      </div>
-      <h1 class="text-center">Login</h1>
-      <div class="row">
-        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
-      </div>
-      <h1 class="text-center">Login</h1>
-      <div class="row">
-        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
+      <div class="container mt-3">
+        <div class="row">
+          <button class="col-sm-6 m-auto mt-2 btn btn-outline-primary">
+            Log In
+          </button>
+        </div>
+        <div class="row">
+          <button
+            class="col-sm-6 m-auto mt-4 btn btn-outline-dark"
+            (click)="toggleDiv()"
+          >
+            Sign Up
+          </button>
+        </div>
       </div>
     </div>
     <div class="col-md-8" *ngIf="divToggler" [@slideUp]>

@@ -31,6 +31,10 @@
     overflow: hidden;
   }
 
+  main {
+    overflow: hidden auto;
+  }
+
   #ABOUT_US_SMALL {
     display: none;
   }
@@ -45,17 +49,15 @@
   }
 
   main {
-    overflow: auto;
-    .col-md-4 {
+    overflow: hidden auto;
+    .col-md-4,
+    #ABOUT_US_SMALL {
       margin-top: 50px !important;
     }
   }
 
   #ABOUT_US {
     display: none;
-  }
-
-  #ABOUT_US_SMALL {
   }
 }
 // SMALL
@@ -68,9 +70,14 @@
     overflow: hidden;
   }
   main {
-    overflow: auto;
-    .col-md-4 {
+    overflow: hidden auto;
+    .col-md-4,
+    #ABOUT_US_SMALL {
       margin-top: 50px !important;
     }
+  }
+
+  #ABOUT_US {
+    display: none;
   }
 }
