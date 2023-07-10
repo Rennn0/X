@@ -3,6 +3,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { MainService, main_aboutUsContent } from '../../services/main.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,6 +33,10 @@ export class LoginComponent {
   divToggler: boolean = false;
 
   titleTime: boolean = false;
+  titleTimeSmall: boolean = false;
+
+  panelOpenState = false;
+
 
   constructor(private main: MainService, private sanitizer: DomSanitizer) { }
 
@@ -46,7 +51,8 @@ export class LoginComponent {
     this.divToggler = !this.divToggler;
   }
 
-  isTitleTime() {
-    this.titleTime = true;
+  isTitleTime(small?: boolean) {
+
+    small ? this.titleTimeSmall = true : this.titleTime = true;
   }
 }

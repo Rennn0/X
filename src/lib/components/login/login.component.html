@@ -23,18 +23,33 @@
     <div class="col-md-8" *ngIf="!divToggler" [@slideDown]>
       <h1 class="text-center">Login</h1>
       <div class="row">
-        <button class="btn btn-outline-danger" (click)="toggleDiv()">
-          Toggled
-        </button>
+        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
+      </div>
+      <h1 class="text-center">Login</h1>
+      <div class="row">
+        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
+      </div>
+      <h1 class="text-center">Login</h1>
+      <div class="row">
+        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
+      </div>
+      <h1 class="text-center">Login</h1>
+      <div class="row">
+        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
+      </div>
+      <h1 class="text-center">Login</h1>
+      <div class="row">
+        <button class="btn btn-outline-danger" (click)="toggleDiv()">OK</button>
       </div>
     </div>
     <div class="col-md-8" *ngIf="divToggler" [@slideUp]>
       <h1 class="text-center">Sign Up</h1>
       <button class="btn btn-outline-danger" (click)="toggleDiv()">
-        Toggle Back
+        Go Back
       </button>
     </div>
-    <div class="col-md-4 m-sm-auto">
+
+    <div class="col-md-4 m-sm-auto" id="ABOUT_US">
       <ngx-typed-js
         [typeSpeed]="50"
         [strings]="[aboutUsContent.title]"
@@ -61,6 +76,32 @@
           <cite title="Source Title"></cite>
         </footer>
       </ngx-typed-js>
+    </div>
+    <div class="col" id="ABOUT_US_SMALL">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header> About Us </mat-expansion-panel-header>
+
+        <ng-template matExpansionPanelContent>
+          <ngx-typed-js
+            [typeSpeed]="20"
+            [strings]="[aboutUsContent.body]"
+            [showCursor]="false"
+            (completed)="isTitleTime(true)"
+          >
+            <p class="typing"></p>
+          </ngx-typed-js>
+          <ngx-typed-js
+            [typeSpeed]="10"
+            [strings]="[aboutUsContent.author]"
+            [showCursor]="false"
+            *ngIf="titleTimeSmall"
+          >
+            <footer class="blockquote-footer typing">
+              <cite title="Source Title"></cite>
+            </footer>
+          </ngx-typed-js>
+        </ng-template>
+      </mat-expansion-panel>
     </div>
   </div>
 </main>

@@ -16,6 +16,10 @@
     margin: auto;
     overflow: hidden;
   }
+
+  #ABOUT_US_SMALL {
+    display: none;
+  }
 }
 // LAPTOP && TAB
 @media screen and (min-width: 769px) and (max-width: 1279px) {
@@ -25,6 +29,10 @@
     height: 100vh;
     margin: auto;
     overflow: hidden;
+  }
+
+  #ABOUT_US_SMALL {
+    display: none;
   }
 }
 // TAB && MOBILE
@@ -41,6 +49,13 @@
     .col-md-4 {
       margin-top: 50px !important;
     }
+  }
+
+  #ABOUT_US {
+    display: none;
+  }
+
+  #ABOUT_US_SMALL {
   }
 }
 // SMALL
