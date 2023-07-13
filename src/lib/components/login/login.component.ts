@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { MainService, main_aboutUsContent } from '../../services/main.service';
+import { MainService } from '../../services/main.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup } from '@angular/forms';
-
+import { FormsService } from 'src/lib/services/forms.service';
+import { aboutUsContent } from 'src/lib/assets/content';
 
 @Component({
   selector: 'app-login',
@@ -38,16 +39,15 @@ export class LoginComponent {
   panelOpenState = false;
 
 
-
-  constructor(private main: MainService, private sanitizer: DomSanitizer) { }
+  constructor(private main: MainService, private sanitizer: DomSanitizer, private forms: FormsService) { }
 
   ngOnInit(): void {
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
       'lib/assets/wawes.mp4'
     );
-    this.aboutUsContent = main_aboutUsContent;
-    this.myLoginForm = this.main.getLoginForm();
-    this.mySignupForm = this.main.getSignupForm();
+    this.aboutUsContent = aboutUsContent;
+    this.myLoginForm = this.forms.getLoginForm();
+    this.mySignupForm = this.forms.getSignupForm();
   }
 
   toggleDiv(): void {
@@ -65,6 +65,7 @@ export class LoginComponent {
 
   signup(): void {
     console.log(this.mySignupForm.value, this.mySignupForm.valid);
+    this.main.postReq(this.mySignupForm.value)
     this.mySignupForm.reset();
   }
 }
