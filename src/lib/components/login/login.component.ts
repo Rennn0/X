@@ -27,8 +27,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class LoginComponent {
   videoUrl: any;
-
   aboutUsContent: any;
+
   myLoginForm !: FormGroup;
   mySignupForm!: FormGroup;
 

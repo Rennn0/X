@@ -17,6 +17,9 @@
     overflow: hidden;
   }
 
+  main {
+    overflow: hidden auto;
+  }
   #ABOUT_US_SMALL {
     display: none;
   }
@@ -84,4 +87,25 @@
 
 .warning {
   border: 1px solid red;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  &::-webkit-scrollbar {
+    width: 0.5px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }

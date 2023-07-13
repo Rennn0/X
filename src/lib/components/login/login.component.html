@@ -181,7 +181,11 @@
         </div>
 
         <div class="row d-flex justify-content-center mt-5">
-          <button class="btn col-sm-4 col-6 btn-primary" (click)="signup()">
+          <button
+            class="btn col-sm-4 col-6 btn-primary"
+            (click)="signup()"
+            [disabled]="mySignupForm.invalid"
+          >
             Register
           </button>
         </div>
@@ -245,8 +249,27 @@
   </div>
 </main>
 
-<footer class="container h-auto mt-2">
-  <div class="row p-2 float-end">
-    <h1>LUKA STUDIO</h1>
+<footer class="container h-25 p-3">
+  <div class="row text-end">
+    <h4>
+      Github
+      <a
+        href="https://github.com/Rennn0/X/tree/master"
+        target="_blank"
+        class="text-info-emphasis"
+        >repository</a
+      >
+    </h4>
+  </div>
+  <div class="row text-end">
+    <h4>
+      Facebook
+      <a
+        href="https://www.facebook.com/luka.danelia.5876/"
+        target="_blank"
+        class="text-info-emphasis"
+        >profile</a
+      >
+    </h4>
   </div>
 </footer>
