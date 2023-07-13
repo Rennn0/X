@@ -21,46 +21,171 @@
 <main class="container w-75 h-75 bg-opacity-75 bg-light">
   <div class="row h-100" id="LOGIN_">
     <div class="col-md-8" *ngIf="!divToggler" [@slideDown]>
-      <div class="row">
-        <label class="sr-only text-center m-2">Username</label>
-        <div class="col-sm-6 col-md-9 m-auto">
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">@</div>
+      <form [formGroup]="myLoginForm" onkeydown="return event.key !='Enter';">
+        <div class="row">
+          <label class="sr-only text-center m-2">Username</label>
+          <div class="col-sm-6 col-md-9 m-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">@</div>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="username"
+                [ngClass]="{
+                  warning:
+                    myLoginForm.get('username')?.touched &&
+                    myLoginForm.get('username')?.invalid
+                }"
+              />
             </div>
-            <input type="text" class="form-control" placeholder="" />
           </div>
         </div>
-      </div>
-      <div class="row">
-        <label class="sr-only text-center m-2">Password</label>
-        <div class="col-sm-6 col-md-9 m-auto">
-          <div class="input-group mb-2">
-            <input type="password" class="form-control" placeholder="" />
+        <div class="row">
+          <label class="sr-only text-center m-2">Password</label>
+          <div class="col-sm-6 col-md-9 m-auto">
+            <div class="input-group mb-2">
+              <input
+                type="password"
+                class="form-control"
+                formControlName="password"
+                [ngClass]="{
+                  warning:
+                    myLoginForm.get('password')?.touched &&
+                    myLoginForm.get('password')?.invalid
+                }"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="container mt-3">
-        <div class="row">
-          <button class="col-sm-6 m-auto mt-2 btn btn-outline-primary">
-            Log In
-          </button>
+        <div class="container mt-3">
+          <div class="row">
+            <button
+              [disabled]="myLoginForm.invalid"
+              class="col-sm-6 m-auto mt-2 btn btn-outline-primary"
+              (click)="login()"
+            >
+              Log In
+            </button>
+          </div>
+          <div class="row">
+            <button
+              class="col-sm-6 m-auto mt-4 btn btn-outline-dark"
+              (click)="toggleDiv()"
+            >
+              Sign Up
+            </button>
+          </div>
         </div>
-        <div class="row">
-          <button
-            class="col-sm-6 m-auto mt-4 btn btn-outline-dark"
-            (click)="toggleDiv()"
-          >
-            Sign Up
-          </button>
-        </div>
-      </div>
+      </form>
     </div>
     <div class="col-md-8" *ngIf="divToggler" [@slideUp]>
-      <h1 class="text-center">Sign Up</h1>
-      <button class="btn btn-outline-danger" (click)="toggleDiv()">
-        Go Back
-      </button>
+      <form
+        [formGroup]="mySignupForm"
+        class="container m-sm-2"
+        onkeydown="return event.key !='Enter';"
+      >
+        <button
+          class="btn col-sm-4 mb-3 btn-close"
+          (click)="toggleDiv()"
+        ></button>
+
+        <div class="row mb-sm-3 mb-1">
+          <div class="col-sm-6">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              placeholder="..."
+              formControlName="name"
+              [ngClass]="{
+                warning:
+                  mySignupForm.get('name')?.touched &&
+                  mySignupForm.get('name')?.invalid
+              }"
+            />
+          </div>
+          <div class="col-sm-6">
+            <label for="surname">Surname</label>
+            <input
+              type="text"
+              name="surname"
+              id="surname"
+              class="form-control"
+              placeholder="..."
+              formControlName="surname"
+              [ngClass]="{
+                warning:
+                  mySignupForm.get('surname')?.touched &&
+                  mySignupForm.get('surname')?.invalid
+              }"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-sm-3 mb-1">
+          <div class="col">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              id="email"
+              placeholder="exXxample@gmail.com"
+              formControlName="email"
+              [ngClass]="{
+                warning:
+                  mySignupForm.get('email')?.touched &&
+                  mySignupForm.get('email')?.invalid
+              }"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-sm-3 mb-1">
+          <div class="col-sm-8">
+            <label for="username">@Username</label>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              id="username"
+              placeholder="cutieKiller8"
+              formControlName="username"
+              [ngClass]="{
+                warning:
+                  mySignupForm.get('username')?.touched &&
+                  mySignupForm.get('username')?.invalid
+              }"
+            />
+          </div>
+          <div class="col-sm-4">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="password"
+              placeholder="stromgest"
+              formControlName="password"
+              [ngClass]="{
+                warning:
+                  mySignupForm.get('password')?.touched &&
+                  mySignupForm.get('password')?.invalid
+              }"
+            />
+          </div>
+        </div>
+
+        <div class="row d-flex justify-content-center mt-5">
+          <button class="btn col-sm-4 col-6 btn-primary" (click)="signup()">
+            Register
+          </button>
+        </div>
+      </form>
     </div>
 
     <div class="col-md-4 m-sm-auto" id="ABOUT_US">
