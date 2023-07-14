@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { postHeader, postUrl } from './jsonBinConf.configuration';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -11,6 +12,8 @@ export class MainService {
   url = postUrl;
   header = postHeader;
 
+  #isLoggedIn_ = new BehaviorSubject<any>(false);
+
   constructor(private http: HttpClient) { }
 
   postReq(body: any) {
@@ -19,7 +22,12 @@ export class MainService {
     );
   }
 
-  //get, update
+  get isLoggedIn() {
+    return this.#isLoggedIn_.asObservable();
+  }
+
+  setLoggedIn(value: boolean) {
+    this.#isLoggedIn_.next(value);
+  }
+
 }
-
-

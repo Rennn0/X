@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
-import { collection, addDoc, getFirestore, getDocs, doc } from "firebase/firestore";
+import { collection, addDoc, getFirestore, getDocs, doc, setDoc, updateDoc, serverTimestamp, getDoc } from "firebase/firestore";
 import { from } from 'rxjs';
-import { firebaseConfiguration } from './firebase.configuration';
+import { firebaseConfiguration } from './firebaseConf.configuration';
 
 @Injectable({
   providedIn: 'root'
@@ -15,23 +15,31 @@ import { firebaseConfiguration } from './firebase.configuration';
   constructor() {
     this.app = initializeApp(this.firebaseConfig);
     this.db = getFirestore(this.app);
-
-
   }
 
-
-  addData(table: string = "Users", data: any) {
-    from(addDoc(collection(this.db, table), data)).subscribe({
-      next: docRef => console.log(table, docRef.id),
-      error: err => console.log(`Error ${err}`)
-    });
+  // cxrilshi amatebs chanawers random IDt
+  addData$(table: string, data: any) {
+    return from(addDoc(collection(this.db, table), data));
   }
 
-  readData(table: string = "Users") {
-    from(getDocs(collection(this.db, table))).subscribe({
-      next: query => query.forEach(doc => console.log(table, doc.id, doc.data())),
-      error: err => console.log(err)
-    });
+  // cxrilidan mogaq mtliani data
+  readData$(table: string) {
+    return from(getDocs(collection(this.db, table)));
+  }
+
+  //cxrilidan IDt wamoigebs chanawers
+  readDataByID$(table: string, id: string) {
+    return from(getDoc(doc(this.db, table, id)));
+  }
+
+  // konkretul IDs adzlev da ise qmni docs
+  setDoc$(table: string, id: string, data: any) {
+    return from(setDoc(doc(this.db, table, id), data));
+  }
+
+  // rac aq velebi imas amatebs kide
+  updateDoc$(table: string, id: string, newValue: any) {
+    return from(updateDoc(doc(this.db, table, id), { ...newValue, timestamp: serverTimestamp() }));
   }
 
 }
