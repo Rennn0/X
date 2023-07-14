@@ -7,6 +7,9 @@ import { NgxTypedJsModule } from "ngx-typed-js";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 
+
+
+
 @NgModule({
         declarations: [LoginComponent, ProfileComponent],
         imports: [
@@ -14,7 +17,7 @@ import { ReactiveFormsModule } from "@angular/forms";
                 MatExpansionModule,
                 HttpClientModule,
                 CommonModule,
-                ReactiveFormsModule
+                ReactiveFormsModule,
         ],
 })
 export class LibModule { }

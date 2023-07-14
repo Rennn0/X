@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup } from '@angular/forms';
 import { FormsService } from 'src/lib/services/forms.service';
 import { aboutUsContent } from 'src/lib/assets/content';
+import { FirestoreService } from 'src/lib/services/firestore.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,7 @@ export class LoginComponent {
   panelOpenState = false;
 
 
-  constructor(private main: MainService, private sanitizer: DomSanitizer, private forms: FormsService) { }
+  constructor(private main: MainService, private firestore: FirestoreService, private sanitizer: DomSanitizer, private forms: FormsService) { }
 
   ngOnInit(): void {
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
