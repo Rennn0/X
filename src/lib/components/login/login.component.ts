@@ -5,6 +5,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup } from '@angular/forms';
 import { FormsService } from 'src/lib/services/forms.service';
 import { aboutUsContent } from 'src/lib/assets/content';
+import { FirestoreService } from 'src/lib/services/firestore.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,7 @@ import { aboutUsContent } from 'src/lib/assets/content';
 
     trigger('slideDown', [
       transition(':enter', [
-        style({ transform: 'translateY(-10%)' }),
+        style({ transform: 'translateY(-50%)' }),
         animate('500ms ease-in-out', style({ transform: 'translateY(0%)' })),
       ]),
     ]),
@@ -39,7 +41,11 @@ export class LoginComponent {
   panelOpenState = false;
 
 
-  constructor(private main: MainService, private sanitizer: DomSanitizer, private forms: FormsService) { }
+  constructor
+    (private main: MainService,
+      private firestore: FirestoreService,
+      private sanitizer: DomSanitizer,
+      private forms: FormsService, private route: Router) { }
 
   ngOnInit(): void {
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
@@ -48,6 +54,7 @@ export class LoginComponent {
     this.aboutUsContent = aboutUsContent;
     this.myLoginForm = this.forms.getLoginForm();
     this.mySignupForm = this.forms.getSignupForm();
+
   }
 
   toggleDiv(): void {
@@ -59,13 +66,22 @@ export class LoginComponent {
   }
 
   login(): void {
-    console.log(this.myLoginForm.value, this.myLoginForm.valid);
+    let data;
+    this.firestore.readDataByID$("Users", "user++").subscribe(resolve => {
+      data = resolve.data();
+      console.log(data);
+      if (data !== undefined) {
+        this.main.setLoggedIn(true);
+        this.route.navigate(['profile'])
+      }
+
+    })
     this.myLoginForm.reset();
   }
 
   signup(): void {
-    console.log(this.mySignupForm.value, this.mySignupForm.valid);
-    this.main.postReq(this.mySignupForm.value)
+
     this.mySignupForm.reset();
   }
 }
+
