@@ -65,23 +65,25 @@ export class LoginComponent {
   }
 
   login(): void {
-    this.firestore.readDataByID$("Users", "user__").subscribe(response => {
+    const docID = '@' + this.myLoginForm.value.username + this.myLoginForm.value.password;
+    this.firestore.readDataByID$("Users", docID).subscribe(response => {
       const data = response.data();
       if (data !== undefined) {
-        console.log("Success", data);
+        console.log("Success");
         this.main.setLoggedIn(true);
         this.main.setProfileData(data);
+        this.myLoginForm.reset();
         this.route.navigate(['profile', data['username']]);
       }
       else {
         console.log("No such user");
       }
     })
-    this.myLoginForm.reset();
   }
 
   signup(): void {
-
+    const docID = '@' + this.mySignupForm.value.username + this.mySignupForm.value.password;
+    this.firestore.setDoc$("Users", docID, this.mySignupForm.value).subscribe(d => console.log("Added new user"));
     this.mySignupForm.reset();
   }
 }
