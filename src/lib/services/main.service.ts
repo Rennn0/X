@@ -13,6 +13,7 @@ export class MainService {
   header = postHeader;
 
   #isLoggedIn_ = new BehaviorSubject<any>(false);
+  #profileData = new BehaviorSubject<any>({});
 
   constructor(private http: HttpClient) { }
 
@@ -30,4 +31,12 @@ export class MainService {
     this.#isLoggedIn_.next(value);
   }
 
+  getProfileData() {
+    return this.#profileData.asObservable();
+  }
+
+
+  setProfileData(newValue: any) {
+    this.#profileData.next(newValue);
+  }
 }

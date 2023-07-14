@@ -54,7 +54,6 @@ export class LoginComponent {
     this.aboutUsContent = aboutUsContent;
     this.myLoginForm = this.forms.getLoginForm();
     this.mySignupForm = this.forms.getSignupForm();
-
   }
 
   toggleDiv(): void {
@@ -66,15 +65,17 @@ export class LoginComponent {
   }
 
   login(): void {
-    let data;
-    this.firestore.readDataByID$("Users", "user++").subscribe(resolve => {
-      data = resolve.data();
-      console.log(data);
+    this.firestore.readDataByID$("Users", "user__").subscribe(response => {
+      const data = response.data();
       if (data !== undefined) {
+        console.log("Success", data);
         this.main.setLoggedIn(true);
-        this.route.navigate(['profile'])
+        this.main.setProfileData(data);
+        this.route.navigate(['profile', data['username']]);
       }
-
+      else {
+        console.log("No such user");
+      }
     })
     this.myLoginForm.reset();
   }
