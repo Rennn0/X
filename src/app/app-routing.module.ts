@@ -5,7 +5,7 @@ import { LoginComponent } from 'src/lib/components/login/login.component';
 import { profileAuthGuard } from 'src/lib/services/profile-auth.guard';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'profile/:username',

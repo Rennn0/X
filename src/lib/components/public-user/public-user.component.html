@@ -1,1 +1,24 @@
-<p>public-user works!</p>
+<title>Public Profile</title>
+<ng-container [ngSwitch]="userData">
+  <loading *ngSwitchCase="false"></loading>
+
+  <h1 *ngSwitchCase="undefined">No such user</h1>
+
+  <ng-container *ngSwitchDefault>
+    <ng-container *ngTemplateOutlet="user"></ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #user>
+  <div class="container">
+    <div class="row">
+      <h1>
+        Public user
+        {{ userData | json }}
+      </h1>
+    </div>
+    <div class="row">
+      <h1>dont worry ur data is safe ahaha</h1>
+    </div>
+  </div>
+</ng-template>
