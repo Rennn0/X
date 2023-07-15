@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import("../lib/lazy/profile.module").then(m => m.ProfileModule),
     canActivate: [profileAuthGuard],
   },
+  {
+    path: 'user/:public',
+    loadChildren: () => import("../lib/lazy/publicUser.module").then(m => m.PublicUserModule)
+  },
   { path: '**', component: Error }
 ];
 
