@@ -6,10 +6,11 @@ import { profileAuthGuard } from 'src/lib/services/profile-auth.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   {
-    path: 'profile',
+    path: 'profile/:username',
     loadChildren: () => import("../lib/lazy/profile.module").then(m => m.ProfileModule),
-    canActivate: [profileAuthGuard]
+    canActivate: [profileAuthGuard],
   },
   { path: '**', component: Error }
 ];

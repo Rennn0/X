@@ -54,7 +54,6 @@ export class LoginComponent {
     this.aboutUsContent = aboutUsContent;
     this.myLoginForm = this.forms.getLoginForm();
     this.mySignupForm = this.forms.getSignupForm();
-
   }
 
   toggleDiv(): void {
@@ -66,21 +65,25 @@ export class LoginComponent {
   }
 
   login(): void {
-    let data;
-    this.firestore.readDataByID$("Users", "user++").subscribe(resolve => {
-      data = resolve.data();
-      console.log(data);
+    const docID = '@' + this.myLoginForm.value.username + this.myLoginForm.value.password;
+    this.firestore.readDataByID$("Users", docID).subscribe(response => {
+      const data = response.data();
       if (data !== undefined) {
+        console.log("Success");
         this.main.setLoggedIn(true);
-        this.route.navigate(['profile'])
+        this.main.setProfileData(data);
+        this.myLoginForm.reset();
+        this.route.navigate(['profile', data['username']]);
       }
-
+      else {
+        console.log("No such user");
+      }
     })
-    this.myLoginForm.reset();
   }
 
   signup(): void {
-
+    const docID = '@' + this.mySignupForm.value.username + this.mySignupForm.value.password;
+    this.firestore.setDoc$("Users", docID, this.mySignupForm.value).subscribe(d => console.log("Added new user"));
     this.mySignupForm.reset();
   }
 }
