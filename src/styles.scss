@@ -7,6 +7,7 @@
   object-fit: cover;
   z-index: -1;
 }
+
 // LARGE
 @media screen and (min-width: 1280px) {
   body {
@@ -17,9 +18,6 @@
     overflow: hidden;
   }
 
-  main {
-    overflow: hidden auto;
-  }
   #ABOUT_US_SMALL {
     display: none;
   }
@@ -32,10 +30,6 @@
     height: 100vh;
     margin: auto;
     overflow: hidden;
-  }
-
-  main {
-    overflow: hidden auto;
   }
 
   #ABOUT_US_SMALL {
@@ -74,6 +68,7 @@
   }
   main {
     overflow: hidden auto;
+
     .col-md-4,
     #ABOUT_US_SMALL {
       margin-top: 50px !important;
