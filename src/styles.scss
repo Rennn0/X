@@ -7,7 +7,12 @@
   object-fit: cover;
   z-index: -1;
 }
-
+.application-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 // LARGE
 @media screen and (min-width: 1280px) {
   body {
@@ -16,6 +21,10 @@
     height: 100vh;
     margin: auto;
     overflow: hidden;
+  }
+
+  main {
+    overflow: hidden auto;
   }
 
   #ABOUT_US_SMALL {
@@ -30,6 +39,10 @@
     height: 100vh;
     margin: auto;
     overflow: hidden;
+  }
+
+  main {
+    overflow: hidden auto;
   }
 
   #ABOUT_US_SMALL {

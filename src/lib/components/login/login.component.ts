@@ -15,14 +15,14 @@ import { Router } from '@angular/router';
   animations: [
     trigger('slideUp', [
       transition(':enter', [
-        style({ transform: 'translateY(60%)' }),
+        style({ transform: 'translateY(100%)' }),
         animate('800ms ease-in-out', style({ transform: 'translateY(0%)' })),
       ]),
     ]),
 
     trigger('slideDown', [
       transition(':enter', [
-        style({ transform: 'translateY(-50%)' }),
+        style({ transform: 'translateY(-100%)' }),
         animate('500ms ease-in-out', style({ transform: 'translateY(0%)' })),
       ]),
     ]),
@@ -65,7 +65,7 @@ export class LoginComponent {
   }
 
   login(): void {
-    const docID = '@' + this.myLoginForm.value.username + this.myLoginForm.value.password;
+    const docID = '@' + this.myLoginForm.value.username;
     this.firestore.readDataByID$("Users", docID).subscribe(response => {
       const data = response.data();
       if (data !== undefined) {
@@ -76,15 +76,18 @@ export class LoginComponent {
         this.route.navigate(['profile', data['username']]);
       }
       else {
-        console.log("No such user");
+        alert("No such user");
       }
     })
   }
 
   signup(): void {
-    const docID = '@' + this.mySignupForm.value.username + this.mySignupForm.value.password;
-    this.firestore.setDoc$("Users", docID, this.mySignupForm.value).subscribe(d => console.log("Added new user"));
-    this.mySignupForm.reset();
+    const docID = '@' + this.mySignupForm.value.username;
+    this.firestore.setDoc$("Users", docID, this.mySignupForm.value).subscribe(() => {
+      alert("Registration succeeded");
+      this.toggleDiv()
+      this.mySignupForm.reset();
+    });
   }
 }
 
