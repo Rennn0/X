@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Error } from 'src/lib/components/error.component';
 import { LoginComponent } from 'src/lib/components/login/login.component';
+import { UploadComponent } from 'src/lib/components/upload/upload.component';
 import { profileAuthGuard } from 'src/lib/services/profile-auth.guard';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
     path: 'user/:public',
     loadChildren: () => import("../lib/lazy/publicUser.module").then(m => m.PublicUserModule)
   },
+  // { path: 'upload', component: UploadComponent },
   { path: '**', component: Error }
 ];
 

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { postHeader, postUrl } from './jsonBinConf.configuration';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
+import { storageUpload } from './firestore.service';
 
 
 @Injectable({
@@ -14,8 +15,18 @@ export class MainService {
 
   #isLoggedIn_ = new BehaviorSubject<any>(false);
   #profileData = new BehaviorSubject<any>({});
+  #avatar = new BehaviorSubject<storageUpload>(new storageUpload);
 
   constructor(private http: HttpClient) { }
+
+  getAvatar() {
+    return from(this.#avatar);
+  }
+
+  setAvatar(newAvatar: storageUpload) {
+    console.log('new avatar ', newAvatar)
+    this.#avatar.next(newAvatar);
+  }
 
   postReq(body: any) {
     return this.http.post(this.url, body, { headers: this.header }).subscribe(

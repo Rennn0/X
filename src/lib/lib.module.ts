@@ -5,16 +5,18 @@ import { NgModule } from "@angular/core";
 import { NgxTypedJsModule } from "ngx-typed-js";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
+import { UploadComponent } from './components/upload/upload.component';
 
 
 @NgModule({
-        declarations: [LoginComponent],
+        declarations: [LoginComponent, UploadComponent],
         imports: [
                 NgxTypedJsModule,
                 MatExpansionModule,
                 HttpClientModule,
                 CommonModule,
                 ReactiveFormsModule,
+
         ],
 })
 export class LibModule { }
