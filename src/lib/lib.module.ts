@@ -7,7 +7,6 @@ import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 import { UploadComponent } from './components/upload/upload.component';
 
-
 @NgModule({
         declarations: [LoginComponent, UploadComponent],
         imports: [
@@ -16,7 +15,6 @@ import { UploadComponent } from './components/upload/upload.component';
                 HttpClientModule,
                 CommonModule,
                 ReactiveFormsModule,
-
         ],
 })
 export class LibModule { }

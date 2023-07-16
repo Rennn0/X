@@ -7,6 +7,9 @@
   object-fit: cover;
   z-index: -1;
 }
+body {
+  background-color: rgba(82, 80, 80, 0.333);
+}
 .application-loading-container {
   display: flex;
   justify-content: center;

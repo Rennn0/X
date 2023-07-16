@@ -11,13 +11,13 @@ const routes: Routes = [
   {
     path: 'profile/:username',
     loadChildren: () => import("../lib/lazy/profile.module").then(m => m.ProfileModule),
-    canActivate: [profileAuthGuard],
+    // canActivate: [profileAuthGuard],
   },
-  {
-    path: 'user/:public',
-    loadChildren: () => import("../lib/lazy/publicUser.module").then(m => m.PublicUserModule)
-  },
-  // { path: 'upload', component: UploadComponent },
+  // {
+  //   path: 'user/:public',
+  //   loadChildren: () => import("../lib/lazy/publicUser.module").then(m => m.PublicUserModule)
+  // },
+  { path: 'upload', component: UploadComponent },
   { path: '**', component: Error }
 ];
 

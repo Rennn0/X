@@ -1,4 +1,22 @@
 <title>Profile</title>
-<p>
-  {{ profileData.name + " " + profileData.surname }}
-</p>
+<div class="container-fluid w-100 h-100">
+  <nav class="navbar navbar-expand-sm">
+    <img
+      [lazyLoad]="img1"
+      [useSrcset]="true"
+      alt="User"
+      style="width: 56px; height: 56px"
+    />
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarToggler"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggler">
+      USERNAME GOES HERE
+    </div>
+  </nav>
+</div>

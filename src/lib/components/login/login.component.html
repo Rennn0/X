@@ -109,18 +109,18 @@
             />
           </div>
           <div class="col-sm-6">
-            <label for="surname">Surname</label>
+            <label for="lastname">Surname</label>
             <input
               type="text"
-              name="surname"
-              id="surname"
+              name="lastname"
+              id="lastname"
               class="form-control"
               placeholder="..."
-              formControlName="surname"
+              formControlName=""
               [ngClass]="{
                 warning:
-                  mySignupForm.get('surname')?.touched &&
-                  mySignupForm.get('surname')?.invalid
+                  mySignupForm.get('lastname')?.touched &&
+                  mySignupForm.get('lastname')?.invalid
               }"
             />
           </div>
