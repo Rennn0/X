@@ -15,17 +15,17 @@ export class MainService {
 
   #isLoggedIn_ = new BehaviorSubject<any>(false);
   #profileData = new BehaviorSubject<any>({});
-  #avatar = new BehaviorSubject<storageUpload>(new storageUpload);
+  #upload = new BehaviorSubject<storageUpload>(new storageUpload);
 
   constructor(private http: HttpClient) { }
 
-  getAvatar() {
-    return from(this.#avatar);
+  getupload() {
+    return from(this.#upload);
   }
 
-  setAvatar(newAvatar: storageUpload) {
-    console.log('new avatar ', newAvatar)
-    this.#avatar.next(newAvatar);
+  setupload(newupload: storageUpload) {
+    console.log('new upload ', newupload)
+    this.#upload.next(newupload);
   }
 
   postReq(body: any) {

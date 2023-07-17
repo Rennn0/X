@@ -9,23 +9,29 @@ import { MainService } from 'src/lib/services/main.service';
 })
 export class UploadComponent {
 
-  myAvatar!: storageUpload;
+  myUpload!: storageUpload;
 
+  description: string = "";
   allowedFiles = ['png', 'jpeg', 'jpg'];
 
   constructor(private firebase: FirestoreService, private main: MainService) { }
 
   ngOnInit() {
-    this.main.getAvatar().subscribe((next) => {
-      this.myAvatar = next;
+    this.main.getupload().subscribe((next) => {
+      this.myUpload = next;
+      // console.log(this.myUpload)
     })
   }
 
+  text(event: any) {
+    this.description += event.target.value;
+    console.log(this.description)
+  }
 
   fileSelected(event: any) {
     let str = event.target.value.split('.')
     if (this.allowedFiles.includes(str[1])) {
-      this.firebase.uploadToStorage(event, "avatars");
+      this.firebase.uploadToStorage(event, "photos", this.description);
     } else {
       alert("Forbidden file type")
     }

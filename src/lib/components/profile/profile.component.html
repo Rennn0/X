@@ -2,11 +2,11 @@
 <div class="container-fluid w-100 h-100">
   <nav class="navbar navbar-expand-sm">
     <img
-      [lazyLoad]="img1"
-      [useSrcset]="true"
+      [lazyLoad]="profileImage"
       alt="User"
       style="width: 56px; height: 56px"
     />
+    <p>USERNAME GOES HERE</p>
     <button
       class="navbar-toggler"
       type="button"
@@ -16,7 +16,21 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarToggler">
-      USERNAME GOES HERE
+      <button class="btn btn-light">Upload</button>
+      <button class="btn btn-secondary">Download</button>
     </div>
   </nav>
+
+  <ng-container *ngFor="let record of renderingProfileRecords">
+    <ng-container *ngFor="let url of record.uploads">
+      <div class="row">
+        <h1>
+          User _ {{ record?.username }} name _ {{ record?.name }} lastName _
+          {{ record?.lastname }}
+        </h1>
+        <img [lazyLoad]="url.url" alt="img" style="width: 50vh; height: 50vh" />
+        <p>{{ url?.description }}</p>
+      </div>
+    </ng-container>
+  </ng-container>
 </div>

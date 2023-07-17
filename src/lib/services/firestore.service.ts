@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
-import { collection, addDoc, getFirestore, getDocs, doc, setDoc, updateDoc, serverTimestamp, getDoc } from "firebase/firestore";
-import { from } from 'rxjs';
+import { collection, addDoc, getFirestore, getDocs, doc, setDoc, updateDoc, serverTimestamp, getDoc, arrayUnion } from "firebase/firestore";
+import { from, map } from 'rxjs';
 import { firebaseConfiguration } from './firebaseConf.configuration';
 import { StorageReference, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { MainService } from './main.service';
@@ -11,6 +11,7 @@ export class storageUpload {
   filePath!: string;
   fileRef!: StorageReference;
   downloadURL!: string;
+  description?: string
 }
 
 
@@ -31,11 +32,13 @@ export class storageUpload {
     this.storageRef = ref(this.storage);
   }
 
-  uploadToStorage(event: any, bucket: string) {
+  uploadToStorage(event: any, bucket: string, description?: string) {
+
     let upload = new storageUpload()
     upload.file = event.target.files[0];
     upload.filePath = `${bucket}/${upload.file.name}`
     upload.fileRef = ref(this.storage, upload.filePath);
+    upload.description = description;
 
     const task = uploadBytesResumable(upload.fileRef, upload.file);
     task.on('state_changed',
@@ -48,8 +51,14 @@ export class storageUpload {
       },
       () => {
         getDownloadURL(task.snapshot.ref).then((downloadURL) => {
-          upload.downloadURL = downloadURL;
-          this.main.setAvatar(upload);
+          let data = {
+            url: downloadURL,
+            description: description,
+          };
+          console.log(data)
+          this.updateDocArray$("Profiles", "@Renn", "uploads", data).subscribe(() => {
+            console.log("Done")
+          })
         });
       }
     );
@@ -62,7 +71,7 @@ export class storageUpload {
 
   // cxrilidan mogaq mtliani data
   readData$(table: string) {
-    return from(getDocs(collection(this.db, table)));
+    return from(getDocs(collection(this.db, table))).pipe(map((qSnap: { docs: any[]; }) => qSnap.docs.map(doc => doc.data())));
   }
 
   //cxrilidan IDt wamoigebs chanawers
@@ -72,7 +81,13 @@ export class storageUpload {
 
   // konkretul IDs adzlev da ise qmni docs
   setDoc$(table: string, id: string, data: any) {
-    return from(setDoc(doc(this.db, table, id), data));
+    return from(setDoc(doc(this.db, table, id), { ...data, timestamp: serverTimestamp() }));
+  }
+
+  updateDocArray$(table: string, id: string, fieldValue: string, data: any) {
+    return from(updateDoc(doc(this.db, table, id), {
+      [fieldValue]: arrayUnion(data)
+    }));
   }
 
   // rac aq velebi imas amatebs kide
