@@ -21,6 +21,8 @@ export class UploadComponent {
       this.myUpload = next;
       // console.log(this.myUpload)
     })
+
+    console.log("UPLOAD", this.main.getRenderingCondition())
   }
 
   text(event: any) {

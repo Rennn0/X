@@ -13,7 +13,7 @@ import { LibModule } from 'src/lib/lib.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    LibModule
+    LibModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

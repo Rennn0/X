@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { postHeader, postUrl } from './jsonBinConf.configuration';
 import { BehaviorSubject, from } from 'rxjs';
-import { storageUpload } from './firestore.service';
+import { FirestoreService, storageUpload } from './firestore.service';
 
 
 @Injectable({
@@ -16,8 +16,28 @@ export class MainService {
   #isLoggedIn_ = new BehaviorSubject<any>(false);
   #profileData = new BehaviorSubject<any>({});
   #upload = new BehaviorSubject<storageUpload>(new storageUpload);
-
+  #renderingData = new BehaviorSubject<any>(undefined);
+  renderingCondition = false;
   constructor(private http: HttpClient) { }
+
+
+  setRenderingData(data: any) {
+
+    this.#renderingData.next(data);
+    this.renderingCondition = true;
+  }
+
+  getRenderingData() {
+    return this.#renderingData.asObservable();
+  }
+
+  getRenderingCondition() {
+    return this.renderingCondition;
+  }
+
+  setRenderingCondition(value: boolean) {
+    this.renderingCondition = value;
+  }
 
   getupload() {
     return from(this.#upload);

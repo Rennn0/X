@@ -20,7 +20,7 @@
 
 <main class="container w-75 h-75 bg-opacity-75 bg-light">
   <div class="row h-100" id="LOGIN_">
-    <div class="col-md-8" *ngIf="!divToggler" [@slideDown]>
+    <div class="col-md-8 slide-down" *ngIf="!divToggler">
       <form [formGroup]="myLoginForm" onkeydown="return event.key !='Enter';">
         <div class="row">
           <label class="sr-only text-center m-2">Username</label>
@@ -80,7 +80,7 @@
         </div>
       </form>
     </div>
-    <div class="col-md-8" *ngIf="divToggler" [@slideUp]>
+    <div class="col-md-8 slide-up" *ngIf="divToggler">
       <form
         [formGroup]="mySignupForm"
         class="container m-sm-2"

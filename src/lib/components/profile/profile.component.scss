@@ -1,3 +1,121 @@
 .container-fluid {
   overflow-y: auto;
 }
+
+img {
+  border-radius: 8px;
+}
+#descP {
+  font-size: x-large;
+  font-style: italic;
+  word-wrap: break-word;
+  background-color: rgba(192, 192, 192, 0.591);
+  padding: 3px 3px 3px 10px;
+  border-radius: 8px;
+}
+.admin {
+  transform: translateY(-3px);
+  margin-left: 5px;
+}
+.menu {
+  background: whitesmoke;
+}
+#navbarToggler {
+  position: relative;
+  justify-content: end;
+  text-align: center;
+  button {
+    width: 120px;
+    height: 50px;
+    margin: 10px 20px;
+  }
+}
+.card-row {
+  // background: rgb(21, 140, 160);
+  // background: linear-gradient(
+  //   304deg,
+  //   rgba(21, 140, 160, 1) 9%,
+  //   rgba(97, 108, 107, 1) 42%,
+  //   rgba(68, 73, 79, 0.8834384095435049) 80%,
+  //   rgba(189, 189, 206, 1) 100%
+  // );
+  background-color: aliceblue;
+  margin: 32px 0;
+  padding: 3px;
+  border-radius: 8px;
+  opacity: 0.95;
+  .__description {
+    padding: 12px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+  }
+  .__fingerprint {
+    margin: 7px 0;
+  }
+}
+mat-icon {
+  transform: translateX(10px);
+}
+
+button {
+  font-size: larger;
+}
+
+::ng-deep img[ng-lazy-images] {
+  &:not(.image-loaded, .thumb-loaded, .image-failed, .no-loader) {
+    background-color: #000;
+    animation-name: animation;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+  }
+}
+
+@keyframes load {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blur-load {
+  transition: opacity;
+  animation-name: load;
+  animation-duration: 200ms;
+  animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes animation {
+  0% {
+    background-color: rgb(190, 190, 190);
+  }
+
+  50.0% {
+    background-color: #ddd;
+  }
+
+  100.0% {
+    background-color: rgb(190, 190, 190);
+  }
+}
+
+@keyframes animation {
+  0% {
+    background-color: rgb(190, 190, 190);
+  }
+
+  50.0% {
+    background-color: #ddd;
+  }
+
+  100.0% {
+    background-color: rgb(190, 190, 190);
+  }
+}

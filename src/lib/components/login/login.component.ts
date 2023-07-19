@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
 import { MainService } from '../../services/main.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup } from '@angular/forms';
@@ -12,21 +11,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  animations: [
-    trigger('slideUp', [
-      transition(':enter', [
-        style({ transform: 'translateY(100%)' }),
-        animate('800ms ease-in-out', style({ transform: 'translateY(0%)' })),
-      ]),
-    ]),
 
-    trigger('slideDown', [
-      transition(':enter', [
-        style({ transform: 'translateY(-100%)' }),
-        animate('500ms ease-in-out', style({ transform: 'translateY(0%)' })),
-      ]),
-    ]),
-  ],
 })
 export class LoginComponent {
   videoUrl: any;
@@ -54,6 +39,7 @@ export class LoginComponent {
     this.aboutUsContent = aboutUsContent;
     this.myLoginForm = this.forms.getLoginForm();
     this.mySignupForm = this.forms.getSignupForm();
+    console.log("LOGIN", this.main.getRenderingCondition())
   }
 
   toggleDiv(): void {

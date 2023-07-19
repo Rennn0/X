@@ -2,13 +2,15 @@
 <div class="container-fluid w-100 h-100">
   <nav class="navbar navbar-expand-sm">
     <img
-      [lazyLoad]="profileImage"
+      ng-lazy-images
+      [lazySrc]="profileImage"
       alt="User"
-      style="width: 56px; height: 56px"
+      style="max-width: 44px; max-height: 48px; width: 100%; height: 100%"
+      class="img-fluid"
     />
-    <p>USERNAME GOES HERE</p>
+    <p class="m-auto text-light display-5 admin">ADMIN</p>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler menu"
       type="button"
       data-toggle="collapse"
       data-target="#navbarToggler"
@@ -16,21 +18,61 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarToggler">
-      <button class="btn btn-light">Upload</button>
-      <button class="btn btn-secondary">Download</button>
+      <button class="btn btn-light" [routerLink]="['/upload']">Upload</button>
+      <button class="btn btn-secondary">My Profile</button>
     </div>
   </nav>
 
-  <ng-container *ngFor="let record of renderingProfileRecords">
-    <ng-container *ngFor="let url of record.uploads">
-      <div class="row">
-        <h1>
-          User _ {{ record?.username }} name _ {{ record?.name }} lastName _
-          {{ record?.lastname }}
-        </h1>
-        <img [lazyLoad]="url.url" alt="img" style="width: 50vh; height: 50vh" />
-        <p>{{ url?.description }}</p>
-      </div>
+  <div class="container-fluid">
+    <ng-container *ngFor="let record of renderingProfileRecords; let i = index">
+      <ng-container *ngFor="let upload of record.uploads; let j = index">
+        <div class="row card-row">
+          <div class="col-lg-5 col-md-7">
+            <ngx-skeleton-loader
+              *ngIf="!upload.loaded"
+              count="1"
+              appearance="line"
+              animation="pulse"
+              [theme]="{
+                height: '400px',
+                marginTop: '10px',
+                background: 'silver'
+              }"
+            >
+            </ngx-skeleton-loader>
+            <img
+              ng-lazy-images
+              [lazySrc]="upload.url"
+              class="img-fluid"
+              (load)="upload.loaded = true"
+            />
+          </div>
+          <div
+            class="col-lg-7 col-md-5 collapse d-sm-block __description"
+            [id]="'desc' + i + j"
+          >
+            <h3>@{{ record.username }}</h3>
+            <p style="font-size: small; color: silver">
+              -- {{ record.name + " " + record.lastname }} --
+            </p>
+            <p style="font-size: medium; font-family: sans-serif">
+              Description:
+            </p>
+            <p id="descP">
+              {{ upload.description }}
+            </p>
+          </div>
+          <div
+            class="row d-sm-none position-relative __fingerprintsty"
+            data-toggle="collapse"
+            [attr.data-target]="'#desc' + i + j"
+          >
+            <h1 class="m-auto mt-2 text-center">
+              <mat-icon> fingerprint </mat-icon>
+            </h1>
+          </div>
+        </div>
+      </ng-container>
     </ng-container>
-  </ng-container>
+  </div>
 </div>

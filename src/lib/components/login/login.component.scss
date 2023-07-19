@@ -14,3 +14,31 @@
   margin: auto !important;
   overflow: hidden;
 }
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.slide-up {
+  animation-name: slideUp;
+  animation-duration: 800ms;
+  animation-timing-function: ease-in-out;
+}
+.slide-down {
+  animation-name: slideDown;
+  animation-duration: 800ms;
+  animation-timing-function: ease-in-out;
+}

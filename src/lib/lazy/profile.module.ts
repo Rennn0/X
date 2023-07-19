@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { MatIconModule } from '@angular/material/icon'
-import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { NgLazyImagesModule } from 'ng-lazy-images';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
     declarations: [ProfileComponent],
@@ -11,7 +12,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
         CommonModule,
         ProfileRoutingModule,
         MatIconModule,
-        LazyLoadImageModule
+        NgLazyImagesModule,
+        NgxSkeletonLoaderModule
     ],
     exports: [ProfileComponent]
 })
