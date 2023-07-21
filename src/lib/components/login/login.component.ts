@@ -6,6 +6,7 @@ import { FormsService } from 'src/lib/services/forms.service';
 import { aboutUsContent } from 'src/lib/assets/content';
 import { FirestoreService } from 'src/lib/services/firestore.service';
 import { Router } from '@angular/router';
+import { profile } from 'src/lib/structures/profile';
 
 @Component({
   selector: 'app-login',
@@ -54,10 +55,18 @@ export class LoginComponent {
       const data = response.data();
       if (data !== undefined) {
         if (data['password'] === this.myLoginForm.value.password) {
+          let profile: profile = {
+            name: data['name'],
+            lastname: data['lastname'],
+            password: data['password'],
+            email: data['email'],
+            username: data['username'],
+            uploads: []
+          }
           this.main.setLoggedIn(true);
-          this.main.setProfileData(data);
+          this.main.setProfileData(profile);
           this.myLoginForm.reset();
-          this.route.navigate(['profile', data['username']]);
+          this.route.navigate(['profile', profile.username]);
         } else {
           alert("Wrong Password")
         }

@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { initializeApp } from "firebase/app";
-import { collection, addDoc, getFirestore, getDocs, doc, setDoc, updateDoc, serverTimestamp, getDoc, arrayUnion } from "firebase/firestore";
+import { collection, addDoc, getFirestore, getDocs, doc, setDoc, updateDoc, getDoc, arrayUnion } from "firebase/firestore";
 import { BehaviorSubject, Subscription, from, map } from 'rxjs';
 import { firebaseConfiguration } from './firebaseConf.configuration';
-import { StorageReference, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
+import { StorageReference, connectStorageEmulator, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { MainService } from './main.service';
+import { profile, upload } from '../structures/profile';
+
+import { Location } from '@angular/common';
 
 export class storageUpload {
   file!: any;
@@ -37,8 +40,9 @@ export class storageUpload {
     return from(this.progress$)
   }
 
-  uploadToStorage(event: any, bucket: string, username: string, description: string) {
+  router = inject(Location);
 
+  uploadToStorage(event: any, bucket: string, username: string, description: string) {
     let upload = new storageUpload()
     upload.file = event.target.files[0];
     upload.filePath = `${bucket}/${upload.file.name}`
@@ -57,13 +61,14 @@ export class storageUpload {
       },
       () => {
         getDownloadURL(task.snapshot.ref).then((downloadURL) => {
-          let data = {
+          let data: upload = {
             url: downloadURL,
             description: description,
+            time: new Date().toUTCString()
           };
           this.progress$.next(null);
           this.updateDocArray$("Profiles", username, "uploads", data).subscribe(() => {
-            console.log("Done")
+            this.router.back()
           })
         });
       }
@@ -86,12 +91,11 @@ export class storageUpload {
   }
 
   // konkretul IDs adzlev da ise qmni docs
-  setDoc$(table: string, id: string, data: any) {
+  setDoc$(table: string, id: string, data: profile) {
     return from(setDoc(doc(this.db, table, id), data));
   }
 
-  updateDocArray$(table: string, id: string, fieldValue: string, data: any) {
-    data = { ...data, time: new Date().toUTCString() }
+  updateDocArray$(table: string, id: string, fieldValue: string, data: upload) {
     console.log(data)
     return from(updateDoc(doc(this.db, table, id), {
       [fieldValue]: arrayUnion(data)

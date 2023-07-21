@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MainService } from 'src/lib/services/main.service';
 import { links, profileImage } from 'src/lib/assets/links';
 import { FirestoreService } from 'src/lib/services/firestore.service';
+import { profile, upload } from 'src/lib/structures/profile';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -9,11 +10,11 @@ import { FirestoreService } from 'src/lib/services/firestore.service';
 })
 export class ProfileComponent {
 
-  profileData: any;
+  profileData: profile | undefined = undefined;
   profileImage = profileImage;
-  renderingProfileRecords!: any;
+  renderingProfileRecords: profile[] | undefined = undefined;
 
-  links = links;
+  // links = links;
 
   constructor(private firestore: FirestoreService, private main: MainService) { }
 
@@ -21,20 +22,18 @@ export class ProfileComponent {
     this.main.getProfileData().subscribe(d => {
       this.profileData = d;
     });
-    this.firestore.readData$("Profiles").subscribe((data) => {
+    this.firestore.readData$("Profiles").subscribe((data: profile[]) => {
 
-      data.forEach(record => {
-        record?.uploads.sort((left: any, right: any) => {
-          return new Date(right?.time).getTime() - new Date(left?.time).getTime()
-        })
-      })
+      this.renderingProfileRecords = data
 
-      this.renderingProfileRecords = data.sort((left: any, right: any) => {
-        return new Date(right?.uploads[0]?.time).getTime() - new Date(left?.uploads[0]?.time).getTime()
-      });
+      this.renderingProfileRecords.forEach(profile =>
+        profile.uploads = profile.uploads.sort((left: upload, right: upload) => new Date(right.time).getTime() - new Date(left.time).getTime())
+      )
 
-      this.main.setRenderingData(data);
-      this.main.setRenderingCondition(true);
+      this.renderingProfileRecords = this.renderingProfileRecords.sort((left: profile, right: profile) => new Date(right.uploads[0].time).getTime() - new Date(left.uploads[0].time).getTime())
+
+      console.log(this.renderingProfileRecords)
+
     })
   }
 }

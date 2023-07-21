@@ -8,7 +8,7 @@
       style="max-width: 44px; max-height: 48px; width: 100%; height: 100%"
       class="img-fluid"
     />
-    <p class="m-auto text-light display-5 admin">{{ profileData.username }}</p>
+    <p class="m-auto text-light display-5 admin">{{ profileData?.username }}</p>
     <button
       class="navbar-toggler menu"
       type="button"
@@ -32,12 +32,12 @@
         <div class="row card-row">
           <div class="col-lg-5 col-md-7">
             <ngx-skeleton-loader
-              *ngIf="!upload.loaded"
+              *ngIf="!upload?.loaded"
               count="1"
               appearance="line"
               animation="pulse"
               [theme]="{
-                height: '400px',
+                height: '50px',
                 marginTop: '10px',
                 background: 'silver'
               }"
@@ -45,7 +45,7 @@
             </ngx-skeleton-loader>
             <img
               ng-lazy-images
-              [lazySrc]="upload?.url"
+              [lazySrc]="upload.url"
               class="img-fluid"
               (load)="upload.loaded = true"
             />
@@ -58,7 +58,7 @@
             <p style="font-size: small; color: silver">
               -- {{ record.name + " " + record.lastname }} --
             </p>
-            <p>{{ upload.time }}</p>
+            <p>{{ upload.time | date : "medium" }}</p>
             <p style="font-size: medium; font-family: sans-serif">
               Description:
             </p>

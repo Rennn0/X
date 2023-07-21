@@ -30,7 +30,7 @@ body {
     max-width: 1280px;
     height: 100vh;
     margin: auto;
-    overflow: hidden;
+    overflow: hidden auto;
   }
 
   main {
@@ -48,7 +48,7 @@ body {
     max-width: 1279px;
     height: 100vh;
     margin: auto;
-    overflow: hidden;
+    overflow: hidden auto;
   }
 
   main {
@@ -87,7 +87,7 @@ body {
     max-width: 480px;
     height: 100vh;
     margin: auto;
-    overflow: hidden;
+    overflow: hidden auto;
   }
   main {
     overflow: hidden auto;
@@ -115,7 +115,7 @@ a {
   margin: 0;
   padding: 0;
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
     background-color: rgba(0, 0, 0, 0.1);
   }
 

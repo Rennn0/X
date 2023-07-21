@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@an
 import { Subscription } from 'rxjs';
 import { FirestoreService } from 'src/lib/services/firestore.service';
 import { MainService } from 'src/lib/services/main.service';
+import { profile } from 'src/lib/structures/profile';
 
 const enum errorStates {
   wrongExtension = 0,
@@ -25,16 +26,22 @@ export class UploadComponent implements OnInit, OnDestroy {
   $profileData!: Subscription;
   $uploadProgress!: Subscription;
 
-  profileData: any;
+  profileData: profile | undefined = undefined;
   chosenFile: any;
 
   description: string = "";
-  username: string = "";
+  username: string | undefined = "";
   progressCount: number | null = null;
 
   errorState: errorStates = errorStates.notInitialized;
   allowedFiles = ['png', 'jpeg', 'jpg'];
-  warningOptions = ["Forbidden file extension", "File exceedes limited size of 150kb", "Provide some description", "Initialize values", "No file chosen"];
+  warningOptions =
+    [
+      "Forbidden file extension",
+      "File exceedes limited size of 1mb",
+      "Provide some description",
+      "Initialize values", "No file chosen"
+    ];
   warningText = "";
 
   constructor() {
@@ -43,7 +50,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.$profileData = this.main.getProfileData().subscribe(pd => this.profileData = pd);
-    this.username = this.profileData.username;
+    this.username = this.profileData?.username;
   }
   ngOnDestroy(): void {
     this.$profileData.unsubscribe();
@@ -61,11 +68,11 @@ export class UploadComponent implements OnInit, OnDestroy {
       this.errorState = errorStates.noDescription;
       return;
     }
-    if (!this.allowedFiles.includes(str[1])) {
+    if (!this.allowedFiles.includes(str[str.length - 1].toLowerCase())) {
       this.errorState = errorStates.wrongExtension;
       return
     }
-    if (uploadSize > 150000) {
+    if (uploadSize > 1000000) {
       this.errorState = errorStates.exceedesLimit;
       return
     }
@@ -90,8 +97,8 @@ export class UploadComponent implements OnInit, OnDestroy {
     }
 
     this.$uploadProgress = this.firebase.getProgress$().subscribe(progress => this.progressCount = progress);
-    console.log(this.profileData.username, this.description)
-    this.firebase.uploadToStorage(this.chosenFile, "photos", '@' + this.profileData.username, this.description);
+    console.log(this.profileData?.username, this.description)
+    this.firebase.uploadToStorage(this.chosenFile, "photos", '@' + this.profileData?.username, this.description);
   }
 
 }

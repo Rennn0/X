@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { postHeader, postUrl } from './jsonBinConf.configuration';
 import { BehaviorSubject, from } from 'rxjs';
 import { FirestoreService, storageUpload } from './firestore.service';
+import { profile } from '../structures/profile';
 
 
 @Injectable({
@@ -13,30 +14,30 @@ export class MainService {
   url = postUrl;
   header = postHeader;
 
-  #isLoggedIn_ = new BehaviorSubject<any>(false);
-  #profileData = new BehaviorSubject<any>({});
+  #isLoggedIn_ = new BehaviorSubject<boolean>(false);
+  #profileData = new BehaviorSubject<profile | undefined>(undefined);
   #upload = new BehaviorSubject<storageUpload>(new storageUpload);
-  #renderingData = new BehaviorSubject<any>(undefined);
-  renderingCondition = false;
+  #renderingData = new BehaviorSubject<profile[] | undefined>(undefined);
+  // renderingCondition = false;
   constructor(private http: HttpClient) { }
 
 
-  setRenderingData(data: any) {
-    this.#renderingData.next(data);
-    this.renderingCondition = true;
-  }
+  // setRenderingData(data: any) {
+  //   this.#renderingData.next(data);
+  //   this.renderingCondition = true;
+  // }
 
   getRenderingData() {
     return this.#renderingData.asObservable();
   }
 
-  getRenderingCondition() {
-    return this.renderingCondition;
-  }
+  // getRenderingCondition() {
+  //   return this.renderingCondition;
+  // }
 
-  setRenderingCondition(value: boolean) {
-    this.renderingCondition = value;
-  }
+  // setRenderingCondition(value: boolean) {
+  //   this.renderingCondition = value;
+  // }
 
   getupload() {
     return from(this.#upload);
@@ -65,7 +66,7 @@ export class MainService {
   }
 
 
-  setProfileData(newValue: any) {
+  setProfileData(newValue: profile) {
     this.#profileData.next(newValue);
   }
 }
