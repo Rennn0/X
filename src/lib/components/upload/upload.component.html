@@ -1,3 +1,61 @@
-<input type="file" (change)="fileSelected($event)" accept=".jpg, .jpeg, .png" />
-<input type="text" (change)="text($event)" />
-<!-- <img [src]="myUpload.downloadURL" /> -->
+<title>Upload</title>
+<div class="container pt-4 mb-3">
+  <mat-icon id="back" routerLink="..">keyboard_backspace</mat-icon>
+</div>
+<div
+  class="alert m-auto alert-danger alert-dismissible fade show"
+  role="alert"
+  *ngIf="warningText"
+>
+  <strong>Warning!</strong> {{ warningText }}
+  <button type="button" class="btn btn-close" data-dismiss="alert"></button>
+</div>
+<div class="container-fluid">
+  <form class="w-100 bg-light rounded-2 p-1">
+    <h1 class="text-center m-3">Upload new <mat-icon>image</mat-icon></h1>
+    <div class="progress" *ngIf="progressCount !== null">
+      <div
+        class="progress-bar"
+        role="progressbar"
+        [style.width.%]="progressCount"
+        [attr.aria-valuenow]="progressCount"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        {{ progressCount }}%
+      </div>
+    </div>
+    <div class="row m-sm-auto p-3">
+      <p class="display-6 m-3">
+        Author <kbd class="m-5">@{{ username }}</kbd>
+      </p>
+    </div>
+    <div class="form-group m-sm-auto p-3">
+      <label for="file" class="display-6 m-3">Choose image</label>
+      <input
+        type="file"
+        name="file"
+        id="file"
+        class="form-control"
+        accept=".jpg, .jpeg, .png"
+        (change)="fileSelected($event)"
+      />
+    </div>
+    <div class="form-group m-sm-auto p-3">
+      <label for="description" class="display-6 m-3">Description</label>
+      <textarea
+        name="description"
+        id="description"
+        cols="30"
+        rows="3"
+        class="form-control"
+        [(ngModel)]="description"
+      ></textarea>
+    </div>
+    <div class="row w-sm-75 m-sm-auto p-5 d-flex justify-content-end">
+      <button class="col-sm-3 col-5 btn btn-danger" (click)="submit()">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

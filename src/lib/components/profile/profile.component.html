@@ -8,7 +8,7 @@
       style="max-width: 44px; max-height: 48px; width: 100%; height: 100%"
       class="img-fluid"
     />
-    <p class="m-auto text-light display-5 admin">ADMIN</p>
+    <p class="m-auto text-light display-5 admin">{{ profileData.username }}</p>
     <button
       class="navbar-toggler menu"
       type="button"
@@ -18,8 +18,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarToggler">
-      <button class="btn btn-light" [routerLink]="['/upload']">Upload</button>
+      <button class="btn btn-light" [routerLink]="['upload']">Upload</button>
       <button class="btn btn-secondary">My Profile</button>
+      <a href="/login">
+        <button class="btn btn-danger">Log Out</button>
+      </a>
     </div>
   </nav>
 
@@ -42,7 +45,7 @@
             </ngx-skeleton-loader>
             <img
               ng-lazy-images
-              [lazySrc]="upload.url"
+              [lazySrc]="upload?.url"
               class="img-fluid"
               (load)="upload.loaded = true"
             />
@@ -55,11 +58,12 @@
             <p style="font-size: small; color: silver">
               -- {{ record.name + " " + record.lastname }} --
             </p>
+            <p>{{ upload.time }}</p>
             <p style="font-size: medium; font-family: sans-serif">
               Description:
             </p>
             <p id="descP">
-              {{ upload.description }}
+              {{ upload?.description }}
             </p>
           </div>
           <div

@@ -9,15 +9,24 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
-    path: 'profile/:username',
-    loadChildren: () => import("../lib/lazy/profile.module").then(m => m.ProfileModule),
-    // canActivate: [profileAuthGuard],
+    path: 'profile',
+    children: [
+      {
+        path: ':username',
+        loadChildren: () => import("../lib/lazy/profile.module").then(m => m.ProfileModule),
+        canActivate: [profileAuthGuard],
+      },
+      {
+        path: ':username/upload',
+        component: UploadComponent,
+        canActivate: [profileAuthGuard]
+      },
+      {
+        path: 'public/:username',
+        loadChildren: () => import("../lib/lazy/publicUser.module").then(m => m.PublicUserModule)
+      },
+    ]
   },
-  // {
-  //   path: 'user/:public',
-  //   loadChildren: () => import("../lib/lazy/publicUser.module").then(m => m.PublicUserModule)
-  // },
-  { path: 'upload', component: UploadComponent },
   { path: '**', component: Error }
 ];
 

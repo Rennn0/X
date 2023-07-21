@@ -1,0 +1,18 @@
+mat-icon {
+  scale: 1.5;
+}
+
+button {
+  font-size: larger;
+}
+
+#back {
+  color: red;
+  scale: 2;
+
+  &:hover {
+    scale: 2.1;
+    color: white;
+    transition: all 100ms ease-in-out;
+  }
+}

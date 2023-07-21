@@ -20,7 +20,7 @@ export class FormsService {
       name: ['', [Validators.required, Validators.maxLength(15)]],
       lastname: ['', [Validators.required, Validators.maxLength(15)]],
       email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+      username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]]
     })
   }

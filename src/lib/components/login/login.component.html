@@ -109,14 +109,14 @@
             />
           </div>
           <div class="col-sm-6">
-            <label for="lastname">Surname</label>
+            <label for="lastname">LastName</label>
             <input
               type="text"
               name="lastname"
               id="lastname"
               class="form-control"
               placeholder="..."
-              formControlName=""
+              formControlName="lastname"
               [ngClass]="{
                 warning:
                   mySignupForm.get('lastname')?.touched &&

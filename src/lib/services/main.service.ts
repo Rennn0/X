@@ -22,7 +22,6 @@ export class MainService {
 
 
   setRenderingData(data: any) {
-
     this.#renderingData.next(data);
     this.renderingCondition = true;
   }
@@ -44,7 +43,6 @@ export class MainService {
   }
 
   setupload(newupload: storageUpload) {
-    console.log('new upload ', newupload)
     this.#upload.next(newupload);
   }
 

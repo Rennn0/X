@@ -25,7 +25,6 @@ export class LoginComponent {
   titleTimeSmall: boolean = false;
   panelOpenState = false;
 
-
   constructor
     (private main: MainService,
       private firestore: FirestoreService,
@@ -39,7 +38,6 @@ export class LoginComponent {
     this.aboutUsContent = aboutUsContent;
     this.myLoginForm = this.forms.getLoginForm();
     this.mySignupForm = this.forms.getSignupForm();
-    console.log("LOGIN", this.main.getRenderingCondition())
   }
 
   toggleDiv(): void {
@@ -52,14 +50,17 @@ export class LoginComponent {
 
   login(): void {
     const docID = '@' + this.myLoginForm.value.username;
-    this.firestore.readDataByID$("Users", docID).subscribe(response => {
+    this.firestore.readDataByID$("Profiles", docID).subscribe(response => {
       const data = response.data();
       if (data !== undefined) {
-        console.log("Success");
-        this.main.setLoggedIn(true);
-        this.main.setProfileData(data);
-        this.myLoginForm.reset();
-        this.route.navigate(['profile', data['username']]);
+        if (data['password'] === this.myLoginForm.value.password) {
+          this.main.setLoggedIn(true);
+          this.main.setProfileData(data);
+          this.myLoginForm.reset();
+          this.route.navigate(['profile', data['username']]);
+        } else {
+          alert("Wrong Password")
+        }
       }
       else {
         alert("No such user");
@@ -69,7 +70,7 @@ export class LoginComponent {
 
   signup(): void {
     const docID = '@' + this.mySignupForm.value.username;
-    this.firestore.setDoc$("Users", docID, this.mySignupForm.value).subscribe(() => {
+    this.firestore.setDoc$("Profiles", docID, { ...this.mySignupForm.value, uploads: [] }).subscribe(() => {
       alert("Registration succeeded");
       this.toggleDiv()
       this.mySignupForm.reset();

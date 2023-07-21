@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { collection, addDoc, getFirestore, getDocs, doc, setDoc, updateDoc, serverTimestamp, getDoc, arrayUnion } from "firebase/firestore";
-import { from, map } from 'rxjs';
+import { BehaviorSubject, Subscription, from, map } from 'rxjs';
 import { firebaseConfiguration } from './firebaseConf.configuration';
 import { StorageReference, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { MainService } from './main.service';
@@ -24,6 +24,7 @@ export class storageUpload {
   storage: any;
   storageRef: any;
 
+  private progress$ = new BehaviorSubject<number | null>(null)
 
   constructor(private main: MainService) {
     this.app = initializeApp(this.firebaseConfig);
@@ -32,7 +33,11 @@ export class storageUpload {
     this.storageRef = ref(this.storage);
   }
 
-  uploadToStorage(event: any, bucket: string, description?: string) {
+  getProgress$() {
+    return from(this.progress$)
+  }
+
+  uploadToStorage(event: any, bucket: string, username: string, description: string) {
 
     let upload = new storageUpload()
     upload.file = event.target.files[0];
@@ -44,6 +49,7 @@ export class storageUpload {
     task.on('state_changed',
       (snapshot) => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        this.progress$.next(progress);
         console.log('Upload is ' + progress + '% done');
       },
       (error) => {
@@ -55,8 +61,8 @@ export class storageUpload {
             url: downloadURL,
             description: description,
           };
-          console.log(data)
-          this.updateDocArray$("Profiles", "@Renn", "uploads", data).subscribe(() => {
+          this.progress$.next(null);
+          this.updateDocArray$("Profiles", username, "uploads", data).subscribe(() => {
             console.log("Done")
           })
         });
@@ -81,10 +87,12 @@ export class storageUpload {
 
   // konkretul IDs adzlev da ise qmni docs
   setDoc$(table: string, id: string, data: any) {
-    return from(setDoc(doc(this.db, table, id), { ...data, timestamp: serverTimestamp() }));
+    return from(setDoc(doc(this.db, table, id), data));
   }
 
   updateDocArray$(table: string, id: string, fieldValue: string, data: any) {
+    data = { ...data, time: new Date().toUTCString() }
+    console.log(data)
     return from(updateDoc(doc(this.db, table, id), {
       [fieldValue]: arrayUnion(data)
     }));
@@ -92,7 +100,7 @@ export class storageUpload {
 
   // rac aq velebi imas amatebs kide
   updateDoc$(table: string, id: string, newValue: any) {
-    return from(updateDoc(doc(this.db, table, id), { ...newValue, timestamp: serverTimestamp() }));
+    return from(updateDoc(doc(this.db, table, id), newValue));
   }
 
 }

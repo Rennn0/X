@@ -3,9 +3,12 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { NgxTypedJsModule } from "ngx-typed-js";
-import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule } from "@angular/forms";
+import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UploadComponent } from './components/upload/upload.component';
+import { MatIconModule } from "@angular/material/icon";
+import { RouterModule } from "@angular/router";
+
 
 @NgModule({
         declarations: [LoginComponent, UploadComponent],
@@ -15,6 +18,10 @@ import { UploadComponent } from './components/upload/upload.component';
                 HttpClientModule,
                 CommonModule,
                 ReactiveFormsModule,
+                MatIconModule,
+                FormsModule,
+                NgOptimizedImage,
+                RouterModule
         ],
 })
 export class LibModule { }

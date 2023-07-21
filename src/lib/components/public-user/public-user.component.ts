@@ -15,12 +15,12 @@ export class PublicUserComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.urlParam = '@' + params['public'];
+      this.urlParam = '@' + params['username'];
 
-      this.fire.readDataByID$("Users", this.urlParam).subscribe(data => {
-        const retieredData = data.data();
-        if (retieredData) {
-          this.userData = retieredData;
+      this.fire.readDataByID$("Profiles", this.urlParam).subscribe(data => {
+        const retrievedData = data.data();
+        if (retrievedData) {
+          this.userData = retrievedData;
         } else {
           this.userData = undefined;
         }
