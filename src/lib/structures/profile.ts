@@ -14,3 +14,9 @@ export interface profile {
     uploads: upload[]
 }
 
+export interface message {
+    username: string,
+    sms: string,
+    time: Date
+}
+

@@ -8,10 +8,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UploadComponent } from './components/upload/upload.component';
 import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
-
+import { ChatComponent } from './components/chat/chat.component';
+// import { NgbActiveOffcanvas, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-        declarations: [LoginComponent, UploadComponent],
+        declarations: [LoginComponent, UploadComponent, ChatComponent],
         imports: [
                 NgxTypedJsModule,
                 MatExpansionModule,
@@ -21,7 +22,8 @@ import { RouterModule } from "@angular/router";
                 MatIconModule,
                 FormsModule,
                 NgOptimizedImage,
-                RouterModule
+                RouterModule,
+
         ],
 })
 export class LibModule { }

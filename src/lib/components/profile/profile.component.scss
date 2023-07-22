@@ -25,7 +25,7 @@ img {
   justify-content: end;
   text-align: center;
   button {
-    width: 120px;
+    width: auto;
     height: 50px;
     margin: 10px 20px;
   }
@@ -70,52 +70,5 @@ button {
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-play-state: running;
-  }
-}
-
-@keyframes load {
-  0% {
-    opacity: 0.1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.blur-load {
-  transition: opacity;
-  animation-name: load;
-  animation-duration: 200ms;
-  animation-timing-function: ease-in-out;
-}
-
-@-webkit-keyframes animation {
-  0% {
-    background-color: rgb(190, 190, 190);
-  }
-
-  50.0% {
-    background-color: #ddd;
-  }
-
-  100.0% {
-    background-color: rgb(190, 190, 190);
-  }
-}
-
-@keyframes animation {
-  0% {
-    background-color: rgb(190, 190, 190);
-  }
-
-  50.0% {
-    background-color: #ddd;
-  }
-
-  100.0% {
-    background-color: rgb(190, 190, 190);
   }
 }

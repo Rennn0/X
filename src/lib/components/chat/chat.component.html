@@ -1,0 +1,29 @@
+<div class="offcanvas-header">
+  <h3 class="offcanvas-title">Chat</h3>
+  <button
+    type="button"
+    class="btn btn-close"
+    (click)="offcanvas.dismiss()"
+  ></button>
+</div>
+<div class="offcanvas-body overflow-y-auto">
+  <ng-container *ngFor="let message of messageQuery">
+    <p>{{ message["sms"] + "   " + message["time"].seconds }}</p>
+  </ng-container>
+</div>
+<div class="offcanvas-end">
+  <div class="row end-row p-sm-4">
+    <input
+      type="text"
+      name="sms"
+      id="sms"
+      class="col-10"
+      ngbAutoFocus
+      #sms
+      (keydown.enter)="sendMessage(sms.value, sms)"
+    />
+    <button class="col-2 btn" (click)="sendMessage(sms.value, sms)">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</div>

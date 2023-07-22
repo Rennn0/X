@@ -19,7 +19,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarToggler">
       <button class="btn btn-light" [routerLink]="['upload']">Upload</button>
-      <button class="btn btn-secondary">My Profile</button>
+      <button class="btn btn-secondary" (click)="openChat()">
+        Global chat
+      </button>
       <a href="/login">
         <button class="btn btn-danger">Log Out</button>
       </a>
