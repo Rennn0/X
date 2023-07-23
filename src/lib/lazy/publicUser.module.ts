@@ -4,13 +4,15 @@ import { PublicUserComponent } from "../components/public-user/public-user.compo
 import { PublicUserRoutingModule } from "./publicUser-routing.module";
 import { Loading } from "../components/loading.component";
 
+
 @NgModule({
     declarations: [PublicUserComponent],
     exports: [PublicUserComponent],
     imports: [
         CommonModule,
         PublicUserRoutingModule,
-        Loading
+        Loading,
+
     ]
 })
 export class PublicUserModule { };

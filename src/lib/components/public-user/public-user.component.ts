@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { FirestoreService } from 'src/lib/services/firestore.service';
 
 @Component({
@@ -13,19 +14,21 @@ export class PublicUserComponent {
   userData: any = false;
   constructor(private route: ActivatedRoute, private fire: FirestoreService) { }
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.urlParam = '@' + params['username'];
 
-      this.fire.readDataByID$("Profiles", this.urlParam).subscribe(data => {
-        const retrievedData = data.data();
-        if (retrievedData) {
-          this.userData = retrievedData;
-        } else {
-          this.userData = undefined;
-        }
-      })
-    })
+  ngOnInit() {
+    // this.route.params.subscribe(params => {
+    //   this.urlParam = '@' + params['username'];
+
+    //   this.fire.readDataByID$("Profiles", this.urlParam).subscribe(data => {
+    //     const retrievedData = data.data();
+    //     if (retrievedData) {
+    //       this.userData = retrievedData;
+    //     } else {
+    //       this.userData = undefined;
+    //     }
+    //   })
+    // })
+
   }
 
 }

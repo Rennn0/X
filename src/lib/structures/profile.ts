@@ -17,6 +17,6 @@ export interface profile {
 export interface message {
     username: string,
     sms: string,
-    time: Date
+    time: number
 }
 

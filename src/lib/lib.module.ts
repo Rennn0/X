@@ -9,8 +9,8 @@ import { UploadComponent } from './components/upload/upload.component';
 import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 import { ChatComponent } from './components/chat/chat.component';
-// import { NgbActiveOffcanvas, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ScrollingModule } from "@angular/cdk/scrolling";
 @NgModule({
         declarations: [LoginComponent, UploadComponent, ChatComponent],
         imports: [
@@ -23,7 +23,8 @@ import { ChatComponent } from './components/chat/chat.component';
                 FormsModule,
                 NgOptimizedImage,
                 RouterModule,
-
+                MatProgressBarModule,
+                ScrollingModule
         ],
 })
 export class LibModule { }

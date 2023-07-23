@@ -6,11 +6,19 @@
     (click)="offcanvas.dismiss()"
   ></button>
 </div>
-<div class="offcanvas-body overflow-y-auto">
-  <ng-container *ngFor="let message of messageQuery">
-    <p>{{ message["sms"] + "   " + message["time"].seconds }}</p>
-  </ng-container>
-</div>
+<ng-container *ngIf="messageQuery.length; else loading">
+  <cdk-virtual-scroll-viewport itemSize="141" class="viewport offcanvas-body">
+    <div class="card mb-4" *cdkVirtualFor="let message of messageQuery">
+      <div class="card-body">
+        <h5 class="card-title">@{{ message["username"] }}</h5>
+        <h6 class="card-subtitle text-muted mb-2">
+          {{ message["time"] | date : "short" }}
+        </h6>
+        <p class="card-text" style="font-size: larger">{{ message["sms"] }}</p>
+      </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</ng-container>
 <div class="offcanvas-end">
   <div class="row end-row p-sm-4">
     <input
@@ -18,6 +26,7 @@
       name="sms"
       id="sms"
       class="col-10"
+      maxlength="50"
       ngbAutoFocus
       #sms
       (keydown.enter)="sendMessage(sms.value, sms)"
@@ -27,3 +36,7 @@
     </button>
   </div>
 </div>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
