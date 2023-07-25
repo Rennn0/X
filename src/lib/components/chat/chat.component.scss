@@ -1,13 +1,12 @@
 .offcanvas-body {
-  height: 80vh;
+  height: 75vh;
 }
 .btn-close {
   scale: 1.2;
 }
 .offcanvas-end {
-  height: 20vh;
   .end-row {
-    padding: 10px 0 0 20px;
+    margin: 10px 0;
     mat-icon {
       float: left;
       scale: 1.3;

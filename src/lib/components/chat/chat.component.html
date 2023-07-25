@@ -1,48 +1,52 @@
-<div class="offcanvas-header">
-  <h3 class="offcanvas-title">Chat</h3>
-  <button
-    type="button"
-    class="btn btn-close"
-    (click)="offcanvas.dismiss()"
-  ></button>
-</div>
-<ng-container *ngIf="messageQuery.length; else loading">
-  <cdk-virtual-scroll-viewport itemSize="141" class="viewport offcanvas-body">
-    <div
-      class="card mb-4 w-75"
-      *cdkVirtualFor="let message of messageQuery"
-      [ngStyle]="
-        username === message.username ? { 'margin-left': 'auto' } : undefined
-      "
-    >
-      <div class="card-body">
-        <h5 class="card-title">@{{ message["username"] }}</h5>
-        <h6 class="card-subtitle text-muted mb-2">
-          {{ message["time"] | date : "short" }}
-        </h6>
-        <p class="card-text" style="font-size: larger">{{ message["sms"] }}</p>
-      </div>
-    </div>
-  </cdk-virtual-scroll-viewport>
-</ng-container>
-<div class="offcanvas-end">
-  <div class="row end-row p-sm-4">
-    <input
-      type="text"
-      name="sms"
-      id="sms"
-      class="col-10"
-      maxlength="50"
-      ngbAutoFocus
-      #sms
-      (keydown.enter)="sendMessage(sms.value, sms)"
-    />
-    <button class="col-2 btn" (click)="sendMessage(sms.value, sms)">
-      <mat-icon>send</mat-icon>
-    </button>
+<div class="container">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Chat</h3>
+    <button
+      type="button"
+      class="btn btn-close"
+      (click)="offcanvas.dismiss()"
+    ></button>
   </div>
-</div>
+  <ng-container *ngIf="messageQuery.length; else loading">
+    <cdk-virtual-scroll-viewport itemSize="131" class="viewport offcanvas-body">
+      <div
+        class="card mb-4 w-75"
+        *cdkVirtualFor="let message of messageQuery"
+        [ngStyle]="
+          username === message.username ? { 'margin-left': 'auto' } : undefined
+        "
+      >
+        <div class="card-body">
+          <h5 class="card-title">@{{ message["username"] }}</h5>
+          <h6 class="card-subtitle text-muted mb-2">
+            {{ message["time"] | date : "short" }}
+          </h6>
+          <p class="card-text" style="font-size: larger">
+            {{ message["sms"] }}
+          </p>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </ng-container>
+  <div class="offcanvas-end">
+    <div class="row end-row p-sm-4">
+      <input
+        type="text"
+        name="sms"
+        id="sms"
+        class="col-10"
+        maxlength="50"
+        ngbAutoFocus
+        #sms
+        (keydown.enter)="sendMessage(sms.value, sms)"
+      />
+      <button class="col-2 btn" (click)="sendMessage(sms.value, sms)">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
 
-<ng-template #loading>
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</ng-template>
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-template>
+</div>

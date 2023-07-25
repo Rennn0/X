@@ -21,7 +21,7 @@
 <main class="container w-75 h-75 bg-opacity-75 bg-light">
   <div class="row h-100" id="LOGIN_">
     <div class="col-md-8 slide-down" *ngIf="!divToggler">
-      <form [formGroup]="myLoginForm" onkeydown="return event.key !='Enter';">
+      <form [formGroup]="myLoginForm">
         <div class="row">
           <label class="sr-only text-center m-2">Username</label>
           <div class="col-sm-6 col-md-9 m-auto">
@@ -55,30 +55,31 @@
                     myLoginForm.get('password')?.touched &&
                     myLoginForm.get('password')?.invalid
                 }"
+                (keydown.enter)="login()"
               />
             </div>
           </div>
         </div>
-        <div class="container mt-3">
-          <div class="row">
-            <button
-              [disabled]="myLoginForm.invalid"
-              class="col-sm-6 m-auto mt-2 btn btn-outline-primary"
-              (click)="login()"
-            >
-              Log In
-            </button>
-          </div>
-          <div class="row">
-            <button
-              class="col-sm-6 m-auto mt-4 btn btn-outline-dark"
-              (click)="toggleDiv()"
-            >
-              Sign Up
-            </button>
-          </div>
-        </div>
       </form>
+      <div class="container mt-3">
+        <div class="row">
+          <button
+            [disabled]="myLoginForm.invalid"
+            class="col-sm-6 m-auto mt-2 btn btn-outline-primary"
+            (click)="login()"
+          >
+            Log In
+          </button>
+        </div>
+        <div class="row">
+          <button
+            class="col-sm-6 m-auto mt-4 btn btn-outline-dark"
+            (click)="toggleDiv()"
+          >
+            Sign Up
+          </button>
+        </div>
+      </div>
     </div>
     <div class="col-md-8 slide-up" *ngIf="divToggler">
       <form

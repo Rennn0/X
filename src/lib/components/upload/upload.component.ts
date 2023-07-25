@@ -38,7 +38,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   warningOptions =
     [
       "Forbidden file extension",
-      "File exceedes limited size of 1mb",
+      "File exceedes limited size of 5mb",
       "Provide some description",
       "Initialize values", "No file chosen"
     ];
@@ -72,7 +72,7 @@ export class UploadComponent implements OnInit, OnDestroy {
       this.errorState = errorStates.wrongExtension;
       return
     }
-    if (uploadSize > 1000000) {
+    if (uploadSize > 5000000) {
       this.errorState = errorStates.exceedesLimit;
       return
     }
