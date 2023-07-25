@@ -43,8 +43,8 @@ export class storageUpload {
     return from(this.progress$)
   }
 
-  messageTracer(): Observable<any> {
-    const messageQuery = query(collection(this.db, "Messages"));
+  queryTracer$(queryName: string): Observable<any> {
+    const messageQuery = query(collection(this.db, queryName));
 
     return new Observable<any>((observer) => {
       const unsubscribe = onSnapshot(messageQuery, (querySnapshot) => {

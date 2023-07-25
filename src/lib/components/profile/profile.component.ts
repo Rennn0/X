@@ -34,34 +34,35 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.$profileData = this.main.getProfileData().subscribe(d => {
-    //   this.profileData = d;
-    // });
+    this.$profileData = this.main.getProfileData().subscribe(d => {
+      this.profileData = d;
+    });
 
-    // this.$renderingPR = this.firestore.readData$("Profiles").subscribe((data: profile[]) => {
+    this.$renderingPR = this.firestore.queryTracer$("Profiles").subscribe({
+      next: (data) => {
+        this.renderingProfileRecords = data
+        this.renderingProfileRecords?.forEach(profile => {
+          if (profile.uploads.length > 1) {
+            profile.uploads = profile.uploads.sort(
+              (left: upload, right: upload) => new Date(right.time).getTime() - new Date(left.time).getTime()
+            )
+          }
+        })
 
-    //   this.renderingProfileRecords = data
-
-    //   this.renderingProfileRecords.forEach(profile => {
-    //     if (profile.uploads.length > 1) {
-    //       profile.uploads = profile.uploads.sort(
-    //         (left: upload, right: upload) => new Date(right.time).getTime() - new Date(left.time).getTime()
-    //       )
-    //     }
-    //   })
-
-    //   this.renderingProfileRecords = this.renderingProfileRecords.sort((left: profile, right: profile) => {
-    //     if (left.uploads.length && right.uploads.length) {
-    //       return new Date(right.uploads[0].time).getTime() - new Date(left.uploads[0].time).getTime()
-    //     } else {
-    //       return -1;
-    //     }
-    //   })
-    // })
+        this.renderingProfileRecords = this.renderingProfileRecords?.sort((left: profile, right: profile) => {
+          if (left.uploads.length && right.uploads.length) {
+            return new Date(right.uploads[0].time).getTime() - new Date(left.uploads[0].time).getTime()
+          } else {
+            return -1;
+          }
+        })
+      },
+      error: (error) => console.log("Error", error)
+    })
   }
 
   openChat(): void {
     const offCanvasRef = this.offCanvasService.open(ChatComponent, { backdrop: "static" });
-    offCanvasRef.componentInstance.username = "renno";
+    offCanvasRef.componentInstance.username = this.profileData?.username;
   }
 }

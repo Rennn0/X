@@ -8,7 +8,13 @@
 </div>
 <ng-container *ngIf="messageQuery.length; else loading">
   <cdk-virtual-scroll-viewport itemSize="141" class="viewport offcanvas-body">
-    <div class="card mb-4" *cdkVirtualFor="let message of messageQuery">
+    <div
+      class="card mb-4 w-75"
+      *cdkVirtualFor="let message of messageQuery"
+      [ngStyle]="
+        username === message.username ? { 'margin-left': 'auto' } : undefined
+      "
+    >
       <div class="card-body">
         <h5 class="card-title">@{{ message["username"] }}</h5>
         <h6 class="card-subtitle text-muted mb-2">

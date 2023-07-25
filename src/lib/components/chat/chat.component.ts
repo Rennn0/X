@@ -19,9 +19,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild(CdkVirtualScrollViewport) viewport!: CdkVirtualScrollViewport
 
 
-  // { username: "renn", sms: "wassup", time: new Date() },
-  // { username: "dane", sms: "hola", time: new Date() },
-  // { username: "luka", sms: "wassup here", time: new Date() }
 
   $messages !: Subscription
   messageQuery: message[] = [];
@@ -37,7 +34,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.$messages = this.firestore.messageTracer().subscribe({
+    this.$messages = this.firestore.queryTracer$("Messages").subscribe({
       next: (messages) => {
         this.messageQuery = messages.sort((left: any, right: any) => left.time - right.time);
         setTimeout(() => {
